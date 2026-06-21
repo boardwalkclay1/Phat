@@ -24,12 +24,12 @@
     background: #000;
   }
 
-  /* FULLSCREEN BACKGROUND IMAGE — SHIFTED UP 0.5 INCH */
+  /* FULLSCREEN BACKGROUND IMAGE — SHIFTED DOWN SO EYES SHOW */
   body {
     background-image: url('phat.jpg');
     background-size: cover;
     background-repeat: no-repeat;
-    background-position: center calc(50% - 48px); /* half inch upward shift */
+    background-position: center calc(50% + 60px); /* move DOWN ~0.6 inch */
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -113,12 +113,16 @@
 
   // FULLSCREEN BUTTON
   fsButton.addEventListener("click", () => {
+    video.muted = false;
+    video.play();
     openFullscreen(video);
   });
 
   // FULLSCREEN ON ROTATION (LANDSCAPE)
   window.addEventListener("orientationchange", () => {
     if (window.orientation === 90 || window.orientation === -90) {
+      video.muted = false;
+      video.play();
       openFullscreen(video);
     }
   });
