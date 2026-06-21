@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>Phat Tribute</title>
 
 <link rel="icon" type="image/jpeg" href="pht.jpg">
@@ -24,25 +24,24 @@
     overflow: hidden;
   }
 
+  /* iPhone fullscreen fix */
   body {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-  }
-
-  #wrapper {
-    width: 100vw;
-    height: 100vh;
-    background: #000;
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
   }
 
   video {
+    position: absolute;
+    top: 0;
+    left: 0;
     width: 100%;
     height: 100%;
     object-fit: cover;
     object-position: center;
     background: #000;
-    display: block;
   }
 
   #overlayFade {
@@ -68,11 +67,9 @@
 
 <div id="overlayFade"></div>
 
-<div id="wrapper">
-  <video id="tributeVideo" autoplay playsinline muted loop>
-    <source src="https://github.com/boardwalkclay1/Phat/releases/download/memories/Phat.Bui.Slideshow.mp4" type="video/mp4">
-  </video>
-</div>
+<video id="tributeVideo" autoplay playsinline muted loop>
+  <source src="https://github.com/boardwalkclay1/Phat/releases/download/memories/Phat.Bui.Slideshow.mp4" type="video/mp4">
+</video>
 
 <script>
   const video = document.getElementById("tributeVideo");
@@ -91,7 +88,6 @@
   function openFullscreen(elem) {
     if (elem.requestFullscreen) elem.requestFullscreen();
     else if (elem.webkitRequestFullscreen) elem.webkitRequestFullscreen();
-    else if (elem.msRequestFullscreen) elem.msRequestFullscreen();
   }
 </script>
 
