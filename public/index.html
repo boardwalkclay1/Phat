@@ -5,11 +5,11 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
 <title>Phat Tribute</title>
 
-<link rel="icon" type="image/jpeg" href="phat.jpg">
+<link rel="icon" type="image/jpeg" href="pht.jpg">
 
 <meta property="og:title" content="Phat Tribute">
 <meta property="og:description" content="In loving memory.">
-<meta property="og:image" content="https://boardwalkclay1.github.io/Phat/phat.jpg">
+<meta property="og:image" content="https://boardwalkclay1.github.io/Phat/pht.jpg">
 <meta property="og:type" content="website">
 
 <link rel="manifest" href="manifest.json">
@@ -24,27 +24,46 @@
     background: #000;
   }
 
-  /* FULLSCREEN BACKGROUND IMAGE */
+  /* FULLSCREEN BACKGROUND IMAGE — SHIFTED UP 0.5 INCH */
   body {
-    background-image: url('phat.jpg');
+    background-image: url('pht.jpg');
     background-size: cover;
-    background-position: top center;
     background-repeat: no-repeat;
+    background-position: center calc(50% - 48px); /* half inch upward shift */
     display: flex;
+    flex-direction: column;
     justify-content: center;
     align-items: center;
   }
 
-  /* CENTERED VIDEO — enlarged by another 1/8 inch */
+  /* CENTERED VIDEO — enlarged by 1/8 inch each direction */
   video {
-    width: calc(90vw + 40px);      /* enlarged again */
+    width: calc(90vw + 40px);
     max-width: calc(500px + 40px);
     height: auto;
-    max-height: 70vh;              /* slightly taller */
+    max-height: 70vh;
     object-fit: contain;
     background: #000;
     border-radius: 14px;
     box-shadow: 0 0 20px #000;
+    margin-bottom: 14px;
+  }
+
+  /* FULLSCREEN BUTTON */
+  #fsButton {
+    padding: 12px 22px;
+    background: rgba(255,255,255,0.15);
+    color: white;
+    font-size: 18px;
+    border-radius: 10px;
+    border: 2px solid white;
+    backdrop-filter: blur(4px);
+    cursor: pointer;
+    transition: 0.2s;
+  }
+
+  #fsButton:active {
+    transform: scale(0.96);
   }
 
   /* Fade overlay */
@@ -73,8 +92,12 @@
   <source src="https://github.com/boardwalkclay1/Phat/releases/download/memories/Phat.Bui.Slideshow.mp4" type="video/mp4">
 </video>
 
+<!-- FULLSCREEN BUTTON -->
+<div id="fsButton">Go Fullscreen</div>
+
 <script>
   const video = document.getElementById("tributeVideo");
+  const fsButton = document.getElementById("fsButton");
 
   // Unmute on first tap
   document.body.addEventListener("click", () => {
@@ -86,6 +109,11 @@
   video.addEventListener("ended", () => {
     video.muted = false;
     video.play();
+  });
+
+  // FULLSCREEN BUTTON
+  fsButton.addEventListener("click", () => {
+    openFullscreen(video);
   });
 
   // FULLSCREEN ON ROTATION (LANDSCAPE)
