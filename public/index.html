@@ -27,9 +27,9 @@
   /* BACKGROUND — EXPANDED + MOVED UP */
   body {
     background-image: url('phat.jpg');
-    background-size: 210% auto;               /* expanded ~1 inch */
+    background-size: 210% auto;
     background-repeat: no-repeat;
-    background-position: center calc(50% - 48px); /* move UP ~1/2 inch */
+    background-position: center calc(50% - 48px);
   }
 
   /* NAME + DATES */
@@ -57,11 +57,11 @@
     text-shadow: 0 0 10px black;
   }
 
-  /* VIDEO WRAPPER — MOVE VIDEO DOWN + LEFT 1.25" */
+  /* VIDEO WRAPPER — MOVE VIDEO DOWN + MORE LEFT */
   #videoWrap {
     position: absolute;
-    top: 260px; /* video LOWER */
-    left: calc(50% - 120px); /* shift LEFT ~1.25 inches */
+    top: 260px;
+    left: calc(50% - 200px); /* MORE LEFT */
     transform: translateX(-50%);
     text-align: center;
     width: 100%;
@@ -85,7 +85,7 @@
   #glow {
     position: absolute;
     top: 260px;
-    left: calc(50% - 120px);
+    left: calc(50% - 200px); /* MATCH VIDEO LEFT SHIFT */
     transform: translateX(-50%);
     width: 600px;
     height: 600px;
@@ -106,8 +106,8 @@
   }
 
   @keyframes floatUp {
-    from { transform: translateY(120vh) translateX(0); }
-    to { transform: translateY(-20vh) translateX(0); }
+    from { transform: translateY(120vh); }
+    to { transform: translateY(-20vh); }
   }
 
   /* FULLSCREEN BUTTON */
@@ -166,32 +166,27 @@
   const video = document.getElementById("tributeVideo");
   const fsButton = document.getElementById("fsButton");
 
-  /* Unmute on first tap */
   document.body.addEventListener("click", () => {
     video.muted = false;
     video.play();
     if (navigator.vibrate) navigator.vibrate(10);
   }, { once: true });
 
-  /* Loop with sound */
   video.addEventListener("ended", () => {
     video.muted = false;
     video.play();
   });
 
-  /* FULLSCREEN BUTTON */
   fsButton.addEventListener("click", () => {
     video.muted = false;
     video.play();
     openFullscreen(video);
   });
 
-  /* TAP ANYWHERE FULLSCREEN */
   video.addEventListener("click", () => {
     openFullscreen(video);
   });
 
-  /* ROTATE FULLSCREEN */
   window.addEventListener("orientationchange", () => {
     if (Math.abs(window.orientation) === 90) {
       video.muted = false;
@@ -200,12 +195,11 @@
     }
   });
 
-  /* CORRECT iPHONE FULLSCREEN JS */
   function openFullscreen(video) {
     if (video.webkitEnterFullscreen) {
-      video.webkitEnterFullscreen();   // iPhone Safari
+      video.webkitEnterFullscreen();
     } else if (video.requestFullscreen) {
-      video.requestFullscreen();        // Desktop + Android
+      video.requestFullscreen();
     }
   }
 </script>
