@@ -5,6 +5,18 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Phat Tribute</title>
 
+<!-- Favicon -->
+<link rel="icon" type="image/jpeg" href="pht.jpg">
+
+<!-- Social Preview -->
+<meta property="og:title" content="Phat Tribute">
+<meta property="og:description" content="In loving memory.">
+<meta property="og:image" content="pht.jpg">
+<meta property="og:type" content="video.other">
+
+<!-- Manifest -->
+<link rel="manifest" href="manifest.json">
+
 <style>
     html, body {
         margin: 0;
@@ -15,7 +27,6 @@
         font-family: Arial, sans-serif;
     }
 
-    /* Center container */
     #container {
         width: 100%;
         height: 100vh;
@@ -25,7 +36,6 @@
         background: #000;
     }
 
-    /* Video styling */
     video {
         width: 100vw;
         height: 100vh;
@@ -33,7 +43,6 @@
         background: #000;
     }
 
-    /* Fade-in effect */
     #overlayFade {
         position: fixed;
         top: 0;
@@ -58,7 +67,7 @@
 <div id="overlayFade"></div>
 
 <div id="container">
-    <video id="tributeVideo" autoplay playsinline muted>
+    <video id="tributeVideo" autoplay playsinline muted loop>
         <source src="https://github.com/boardwalkclay1/Phat/releases/download/memories/Phat.Bui.Slideshow.mp4" type="video/mp4">
     </video>
 </div>
@@ -66,14 +75,14 @@
 <script>
     const video = document.getElementById("tributeVideo");
 
-    // Force autoplay with sound after user gesture
+    // Enable sound + fullscreen on first tap
     document.body.addEventListener("click", () => {
         video.muted = false;
         video.play();
         openFullscreen(video);
     }, { once: true });
 
-    // Auto fullscreen on load (mobile-safe)
+    // Auto fullscreen on load (desktop)
     window.onload = () => {
         setTimeout(() => {
             openFullscreen(video);
