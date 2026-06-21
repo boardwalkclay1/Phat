@@ -6,7 +6,7 @@
 <title>Phat Tribute</title>
 
 <!-- Favicon -->
-<link rel="icon" type="image/jpeg" href="phat.jpg">
+<link rel="icon" type="image/jpeg" href="pht.jpg">
 
 <!-- Social Preview -->
 <meta property="og:title" content="Phat Tribute">
@@ -75,19 +75,18 @@
 <script>
     const video = document.getElementById("tributeVideo");
 
-    // Enable sound + fullscreen on first tap
+    // First tap: unmute + fullscreen + keep sound on future loops
     document.body.addEventListener("click", () => {
         video.muted = false;
         video.play();
         openFullscreen(video);
     }, { once: true });
 
-    // Auto fullscreen on load (desktop)
-    window.onload = () => {
-        setTimeout(() => {
-            openFullscreen(video);
-        }, 500);
-    };
+    // Ensure sound stays ON after looping
+    video.addEventListener("ended", () => {
+        video.muted = false;
+        video.play();
+    });
 
     function openFullscreen(elem) {
         if (elem.requestFullscreen) elem.requestFullscreen();
