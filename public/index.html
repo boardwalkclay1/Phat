@@ -27,22 +27,22 @@
   /* BACKGROUND IMAGE — BIGGER + MOVED UP */
   body {
     background-image: url('phat.jpg');
-    background-size: 140% auto;               /* zoom in more */
+    background-size: 160% auto;               /* BIGGER (zoomed in more) */
     background-repeat: no-repeat;
-    background-position: center calc(50% - 120px); /* move UP more so eyes show */
+    background-position: center calc(50% - 140px); /* MOVE IMAGE UP */
   }
 
-  /* VIDEO WRAPPER — moves video DOWN safely */
+  /* VIDEO WRAPPER — MOVE VIDEO DOWN */
   #videoWrap {
     position: absolute;
-    top: 160px; /* move video DOWN */
+    top: 240px; /* LOWER VIDEO on the screen */
     left: 50%;
     transform: translateX(-50%);
     text-align: center;
     width: 100%;
   }
 
-  /* VIDEO — enlarged by 1/8 inch each direction */
+  /* VIDEO — keep size you asked for */
   video {
     width: calc(90vw + 40px);
     max-width: calc(500px + 40px);
@@ -106,26 +106,22 @@
   const video = document.getElementById("tributeVideo");
   const fsButton = document.getElementById("fsButton");
 
-  /* Unmute on first tap */
   document.body.addEventListener("click", () => {
     video.muted = false;
     video.play();
   }, { once: true });
 
-  /* Keep sound on loop */
   video.addEventListener("ended", () => {
     video.muted = false;
     video.play();
   });
 
-  /* FULLSCREEN BUTTON */
   fsButton.addEventListener("click", () => {
     video.muted = false;
     video.play();
     openFullscreen(video);
   });
 
-  /* FULLSCREEN ON ROTATION */
   window.addEventListener("orientationchange", () => {
     if (Math.abs(window.orientation) === 90) {
       video.muted = false;
