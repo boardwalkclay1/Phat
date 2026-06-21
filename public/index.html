@@ -24,18 +24,18 @@
     background: #000;
   }
 
-  /* BACKGROUND IMAGE — EXPANDED + MOVED UP */
+  /* BACKGROUND IMAGE — EXPANDED + MOVED DOWN */
   body {
     background-image: url('phat.jpg');
-    background-size: 185% auto;               /* EXPANDED ~1 inch more */
+    background-size: 195% auto;               /* expanded ~1/2 inch */
     background-repeat: no-repeat;
-    background-position: center calc(50% - 140px); /* keep image UP */
+    background-position: center calc(50% + 48px); /* move DOWN ~1/2 inch */
   }
 
-  /* VIDEO WRAPPER — MOVE VIDEO DOWN */
+  /* VIDEO WRAPPER — KEEP VIDEO DOWN */
   #videoWrap {
     position: absolute;
-    top: 240px; /* video LOWER on screen */
+    top: 240px; /* video stays LOWER */
     left: 50%;
     transform: translateX(-50%);
     text-align: center;
@@ -118,7 +118,7 @@
     video.play();
   });
 
-  /* FULLSCREEN BUTTON */
+  /* FULLSCREEN BUTTON — correct iPhone fullscreen JS */
   fsButton.addEventListener("click", () => {
     video.muted = false;
     video.play();
@@ -134,9 +134,12 @@
     }
   });
 
-  function openFullscreen(elem) {
-    if (elem.requestFullscreen) elem.requestFullscreen();
-    else if (elem.webkitRequestFullscreen) elem.webkitRequestFullscreen();
+  function openFullscreen(video) {
+    if (video.webkitEnterFullscreen) {
+      video.webkitEnterFullscreen();   // iPhone Safari
+    } else if (video.requestFullscreen) {
+      video.requestFullscreen();        // Desktop + Android
+    }
   }
 </script>
 
