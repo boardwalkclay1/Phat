@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>Phat Tribute</title>
 
 <!-- Favicon -->
@@ -11,8 +11,8 @@
 <!-- Social Preview -->
 <meta property="og:title" content="Phat Tribute">
 <meta property="og:description" content="In loving memory.">
-<meta property="og:image" content="phat.jpg">
-<meta property="og:type" content="video.other">
+<meta property="og:image" content="pht.jpg">
+<meta property="og:type" content="website">
 
 <!-- Manifest -->
 <link rel="manifest" href="manifest.json">
@@ -27,22 +27,20 @@
         font-family: Arial, sans-serif;
     }
 
-    #container {
-        width: 100%;
-        height: 100vh;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        background: #000;
-    }
-
+    /* FULLSCREEN VIDEO THAT FITS ALL PHONES */
     video {
+        position: fixed;
+        inset: 0;
         width: 100vw;
         height: 100vh;
         object-fit: cover;
+        object-position: center;
         background: #000;
+        padding: env(safe-area-inset-top) env(safe-area-inset-right)
+                 env(safe-area-inset-bottom) env(safe-area-inset-left);
     }
 
+    /* Fade-in overlay */
     #overlayFade {
         position: fixed;
         top: 0;
@@ -66,11 +64,9 @@
 
 <div id="overlayFade"></div>
 
-<div id="container">
-    <video id="tributeVideo" autoplay playsinline muted loop>
-        <source src="https://github.com/boardwalkclay1/Phat/releases/download/memories/Phat.Bui.Slideshow.mp4" type="video/mp4">
-    </video>
-</div>
+<video id="tributeVideo" autoplay playsinline muted loop>
+    <source src="https://github.com/boardwalkclay1/Phat/releases/download/memories/Phat.Bui.Slideshow.mp4" type="video/mp4">
+</video>
 
 <script>
     const video = document.getElementById("tributeVideo");
