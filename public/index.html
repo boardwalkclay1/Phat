@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Phat Tribute</title>
 
 <link rel="icon" type="image/jpeg" href="pht.jpg">
@@ -22,23 +22,18 @@
     height: 100%;
     width: 100%;
     overflow: hidden;
+    display: flex;
+    justify-content: center;
+    align-items: center;
   }
 
-  body {
-    position: fixed;
-    inset: 0;
-  }
-
-  /* FORCE VIDEO TO FILL VERTICAL SCREEN */
+  /* SMALL VIDEO THAT FITS THE PHONE */
   video {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    width: auto;
-    height: 100vh;
-    transform: translate(-50%, -50%);
-    object-fit: cover;
+    width: 90vw;          /* small and fits width */
+    max-height: 60vh;     /* prevents it from being tall */
+    object-fit: contain;  /* keeps full video visible */
     background: #000;
+    border-radius: 12px;  /* optional clean rounded look */
   }
 
   #overlayFade {
@@ -71,18 +66,12 @@
   document.body.addEventListener("click", () => {
     video.muted = false;
     video.play();
-    openFullscreen(video);
   }, { once: true });
 
   video.addEventListener("ended", () => {
     video.muted = false;
     video.play();
   });
-
-  function openFullscreen(elem) {
-    if (elem.requestFullscreen) elem.requestFullscreen();
-    else if (elem.webkitRequestFullscreen) elem.webkitRequestFullscreen();
-  }
 </script>
 
 </body>
