@@ -24,20 +24,26 @@
     background: #000;
   }
 
-  /* BIGGER BACKGROUND IMAGE, MOVED UP */
+  /* BACKGROUND IMAGE — BIGGER + MOVED UP */
   body {
     background-image: url('phat.jpg');
-    background-size: 120% auto;              /* zoom image in */
+    background-size: 140% auto;               /* zoom in more */
     background-repeat: no-repeat;
-    background-position: center calc(50% - 60px); /* move image UP */
-    display: flex;
-    flex-direction: column;
-    align-items: center;
+    background-position: center calc(50% - 120px); /* move UP more so eyes show */
   }
 
-  /* CENTERED VIDEO, MOVED DOWN */
+  /* VIDEO WRAPPER — moves video DOWN safely */
+  #videoWrap {
+    position: absolute;
+    top: 160px; /* move video DOWN */
+    left: 50%;
+    transform: translateX(-50%);
+    text-align: center;
+    width: 100%;
+  }
+
+  /* VIDEO — enlarged by 1/8 inch each direction */
   video {
-    margin-top: 90px;                        /* push video DOWN */
     width: calc(90vw + 40px);
     max-width: calc(500px + 40px);
     height: auto;
@@ -46,11 +52,11 @@
     background: #000;
     border-radius: 14px;
     box-shadow: 0 0 20px #000;
-    margin-bottom: 14px;
   }
 
   /* FULLSCREEN BUTTON */
   #fsButton {
+    margin-top: 18px;
     padding: 12px 22px;
     background: rgba(255,255,255,0.15);
     color: white;
@@ -60,7 +66,7 @@
     backdrop-filter: blur(4px);
     cursor: pointer;
     transition: 0.2s;
-    margin-bottom: 40px;
+    display: inline-block;
   }
 
   #fsButton:active {
@@ -88,34 +94,40 @@
 
 <div id="overlayFade"></div>
 
-<video id="tributeVideo" autoplay playsinline muted loop>
-  <source src="https://github.com/boardwalkclay1/Phat/releases/download/memories/Phat.Bui.Slideshow.mp4" type="video/mp4">
-</video>
+<div id="videoWrap">
+  <video id="tributeVideo" autoplay playsinline muted loop>
+    <source src="https://github.com/boardwalkclay1/Phat/releases/download/memories/Phat.Bui.Slideshow.mp4" type="video/mp4">
+  </video>
 
-<div id="fsButton">Go Fullscreen</div>
+  <div id="fsButton">Go Fullscreen</div>
+</div>
 
 <script>
   const video = document.getElementById("tributeVideo");
   const fsButton = document.getElementById("fsButton");
 
+  /* Unmute on first tap */
   document.body.addEventListener("click", () => {
     video.muted = false;
     video.play();
   }, { once: true });
 
+  /* Keep sound on loop */
   video.addEventListener("ended", () => {
     video.muted = false;
     video.play();
   });
 
+  /* FULLSCREEN BUTTON */
   fsButton.addEventListener("click", () => {
     video.muted = false;
     video.play();
     openFullscreen(video);
   });
 
+  /* FULLSCREEN ON ROTATION */
   window.addEventListener("orientationchange", () => {
-    if (window.orientation === 90 || window.orientation === -90) {
+    if (Math.abs(window.orientation) === 90) {
       video.muted = false;
       video.play();
       openFullscreen(video);
