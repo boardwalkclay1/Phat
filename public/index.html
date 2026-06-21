@@ -7,14 +7,11 @@
 
 <link rel="icon" type="image/jpeg" href="phat.jpg">
 
-<!-- CINEMATIC SOCIAL PREVIEW -->
 <meta property="og:title" content="In Loving Memory of Phat">
 <meta property="og:description" content="Forever in our hearts.">
 <meta property="og:image" content="https://boardwalkclay1.github.io/Phat/phat.jpg">
 <meta property="og:type" content="website">
 <meta name="twitter:card" content="summary_large_image">
-
-<link rel="manifest" href="manifest.json">
 
 <style>
   html, body {
@@ -33,43 +30,6 @@
     background-size: 210% auto;               /* expanded ~1 inch */
     background-repeat: no-repeat;
     background-position: center calc(50% - 48px); /* move UP ~1/2 inch */
-  }
-
-  /* VIGNETTE */
-  #vignette {
-    position: fixed;
-    inset: 0;
-    pointer-events: none;
-    background: radial-gradient(circle, rgba(0,0,0,0) 40%, rgba(0,0,0,0.65) 100%);
-    z-index: 2;
-  }
-
-  /* LIGHT RAYS */
-  #lightRays {
-    position: fixed;
-    inset: 0;
-    background: url('https://i.imgur.com/7N4Q0kM.png') center/cover no-repeat;
-    opacity: 0.18;
-    mix-blend-mode: screen;
-    pointer-events: none;
-    z-index: 1;
-  }
-
-  /* PARTICLES */
-  #particles {
-    position: fixed;
-    inset: 0;
-    pointer-events: none;
-    z-index: 3;
-    background-image: url('https://i.imgur.com/8fKQZ8R.png');
-    background-size: cover;
-    opacity: 0.25;
-    animation: drift 40s linear infinite;
-  }
-
-  @keyframes drift {
-    from { transform: translateY(0); }
-    to { transform: translateY(-200px); }
   }
 
   /* NAME + DATES */
@@ -97,11 +57,11 @@
     text-shadow: 0 0 10px black;
   }
 
-  /* VIDEO WRAPPER — KEEP VIDEO DOWN */
+  /* VIDEO WRAPPER — MOVE VIDEO DOWN + LEFT 1.25" */
   #videoWrap {
     position: absolute;
     top: 260px; /* video LOWER */
-    left: 50%;
+    left: calc(50% - 120px); /* shift LEFT ~1.25 inches */
     transform: translateX(-50%);
     text-align: center;
     width: 100%;
@@ -121,11 +81,11 @@
     box-shadow: 0 0 40px rgba(0,0,0,0.9);
   }
 
-  /* AMBIENT GLOW */
+  /* SUBTLE GLOW */
   #glow {
     position: absolute;
     top: 260px;
-    left: 50%;
+    left: calc(50% - 120px);
     transform: translateX(-50%);
     width: 600px;
     height: 600px;
@@ -133,6 +93,21 @@
     filter: blur(60px);
     z-index: 5;
     pointer-events: none;
+  }
+
+  /* EMOJI FLOATERS */
+  .emoji {
+    position: fixed;
+    font-size: 42px;
+    animation: floatUp 12s linear infinite;
+    opacity: 0.9;
+    pointer-events: none;
+    z-index: 3;
+  }
+
+  @keyframes floatUp {
+    from { transform: translateY(120vh) translateX(0); }
+    to { transform: translateY(-20vh) translateX(0); }
   }
 
   /* FULLSCREEN BUTTON */
@@ -164,10 +139,6 @@
 
 <body>
 
-<div id="lightRays"></div>
-<div id="particles"></div>
-<div id="vignette"></div>
-
 <div id="titleBlock">
   <h1>Phat Bui</h1>
   <h2>Forever in Our Hearts</h2>
@@ -183,6 +154,14 @@
   <div id="fsButton">Fullscreen</div>
 </div>
 
+<!-- EMOJI FLOATERS -->
+<div class="emoji" style="left:10%;">🕊️</div>
+<div class="emoji" style="left:25%; animation-delay:2s;">🌸</div>
+<div class="emoji" style="left:40%; animation-delay:4s;">🛼</div>
+<div class="emoji" style="left:55%; animation-delay:1s;">🕊️</div>
+<div class="emoji" style="left:70%; animation-delay:3s;">🌸</div>
+<div class="emoji" style="left:85%; animation-delay:5s;">🛼</div>
+
 <script>
   const video = document.getElementById("tributeVideo");
   const fsButton = document.getElementById("fsButton");
@@ -191,7 +170,7 @@
   document.body.addEventListener("click", () => {
     video.muted = false;
     video.play();
-    if (navigator.vibrate) navigator.vibrate(10); // haptic
+    if (navigator.vibrate) navigator.vibrate(10);
   }, { once: true });
 
   /* Loop with sound */
