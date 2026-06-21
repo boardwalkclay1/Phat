@@ -24,20 +24,20 @@
     background: #000;
   }
 
-  /* FULLSCREEN BACKGROUND IMAGE — SHIFTED DOWN SO EYES SHOW */
+  /* BIGGER BACKGROUND IMAGE, MOVED UP */
   body {
     background-image: url('phat.jpg');
-    background-size: cover;
+    background-size: 120% auto;              /* zoom image in */
     background-repeat: no-repeat;
-    background-position: center calc(50% + 60px); /* move DOWN ~0.6 inch */
+    background-position: center calc(50% - 60px); /* move image UP */
     display: flex;
     flex-direction: column;
-    justify-content: center;
     align-items: center;
   }
 
-  /* CENTERED VIDEO — enlarged by 1/8 inch each direction */
+  /* CENTERED VIDEO, MOVED DOWN */
   video {
+    margin-top: 90px;                        /* push video DOWN */
     width: calc(90vw + 40px);
     max-width: calc(500px + 40px);
     height: auto;
@@ -60,6 +60,7 @@
     backdrop-filter: blur(4px);
     cursor: pointer;
     transition: 0.2s;
+    margin-bottom: 40px;
   }
 
   #fsButton:active {
@@ -87,38 +88,32 @@
 
 <div id="overlayFade"></div>
 
-<!-- CENTER VIDEO -->
 <video id="tributeVideo" autoplay playsinline muted loop>
   <source src="https://github.com/boardwalkclay1/Phat/releases/download/memories/Phat.Bui.Slideshow.mp4" type="video/mp4">
 </video>
 
-<!-- FULLSCREEN BUTTON -->
 <div id="fsButton">Go Fullscreen</div>
 
 <script>
   const video = document.getElementById("tributeVideo");
   const fsButton = document.getElementById("fsButton");
 
-  // Unmute on first tap
   document.body.addEventListener("click", () => {
     video.muted = false;
     video.play();
   }, { once: true });
 
-  // Keep sound on loop
   video.addEventListener("ended", () => {
     video.muted = false;
     video.play();
   });
 
-  // FULLSCREEN BUTTON
   fsButton.addEventListener("click", () => {
     video.muted = false;
     video.play();
     openFullscreen(video);
   });
 
-  // FULLSCREEN ON ROTATION (LANDSCAPE)
   window.addEventListener("orientationchange", () => {
     if (window.orientation === 90 || window.orientation === -90) {
       video.muted = false;
