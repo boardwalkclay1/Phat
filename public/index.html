@@ -18,34 +18,36 @@
   html, body {
     margin: 0;
     padding: 0;
-    background: #000;
     height: 100%;
     width: 100%;
-    overflow-x: hidden;
+    overflow: hidden;
+    background: #000;
+  }
+
+  /* FULLSCREEN BACKGROUND IMAGE */
+  body {
+    background-image: url('phat.jpg');
+    background-size: cover;
+    background-position: top center;
+    background-repeat: no-repeat;
     display: flex;
-    flex-direction: column;
+    justify-content: center;
     align-items: center;
   }
 
-  /* TOP + BOTTOM IMAGES */
-  .phat-img {
-    width: 90vw;
-    max-width: 500px;
-    margin: 12px 0;
-    border-radius: 10px;
-  }
-
-  /* VIDEO — NOW EVEN BIGGER (another 1/8 inch each direction) */
+  /* CENTERED VIDEO — enlarged by another 1/8 inch */
   video {
-    width: calc(90vw + 40px);      /* previously +20px, now +40px total */
+    width: calc(90vw + 40px);      /* enlarged again */
     max-width: calc(500px + 40px);
-    max-height: 65vh;              /* slightly taller too */
+    height: auto;
+    max-height: 70vh;              /* slightly taller */
     object-fit: contain;
     background: #000;
-    border-radius: 12px;
-    margin: 12px 0;
+    border-radius: 14px;
+    box-shadow: 0 0 20px #000;
   }
 
+  /* Fade overlay */
   #overlayFade {
     position: fixed;
     inset: 0;
@@ -66,16 +68,10 @@
 
 <div id="overlayFade"></div>
 
-<!-- TOP IMAGE -->
-<img src="phat.jpg" class="phat-img" alt="Phat Top">
-
-<!-- VIDEO -->
+<!-- CENTER VIDEO -->
 <video id="tributeVideo" autoplay playsinline muted loop>
   <source src="https://github.com/boardwalkclay1/Phat/releases/download/memories/Phat.Bui.Slideshow.mp4" type="video/mp4">
 </video>
-
-<!-- BOTTOM IMAGE -->
-<img src="phat.jpg" class="phat-img" alt="Phat Bottom">
 
 <script>
   const video = document.getElementById("tributeVideo");
